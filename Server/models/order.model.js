@@ -31,5 +31,18 @@ const orderSchema = new mongoose.Schema({
         type : mongoose.Schema.ObjectId,
         ref : "address"
     },
-    subTotalAmount
+    subTotalAmt : {
+        type : Number,
+        default : 0
+    },
+    invoice_receipt : {
+        type : String,
+        default : ""
+    }
+}, {
+    timestamps : true
 })
+
+const OrderModel = mongoose.model('order', orderSchema)
+
+export default OrderModel
