@@ -1,4 +1,5 @@
 import UserModel from '../models/user.model.js'
+import bcrypt from 'bcryptjs'
 
 export async function registerUserController(request, response){
     try{
@@ -18,7 +19,19 @@ export async function registerUserController(request, response){
                 success : false
             })
         }
+        const salt = await bcrypt.genSalt(10)
+        const hashPassword = await bcrypt.hash(password, salt)
+
+        const payload = {
+            name,
+            email,
+            password : hashPassword
+        }
+
+        const newUser = new UserModel(payload)
+        const save = await newUser.save()
         
+
 
     } catch(error){
         return response.status(500).json({
