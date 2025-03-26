@@ -1,79 +1,79 @@
 import mongoose from "mongoose";
 
-const userSchema = new moongoose.userSchema({
-    name : {
-        type : String,
-        required : [true, "Provide Name"]
+const userSchema = new mongoose.Schema({  // Fixed moongoose to mongoose
+    name: {
+        type: String,
+        required: [true, "Provide Name"]
     },
-    email : {
-        type : String,
-        required : [true, "Provide Email"],
-        unique : true
+    email: {
+        type: String,
+        required: [true, "Provide Email"],
+        unique: true
     },
-    password : {
-        type : String,
-        required : [true, "Provide Password"]
+    password: {
+        type: String,
+        required: [true, "Provide Password"]
     },
-    avatar : {
-        type : String,
-        default : ""
+    avatar: {
+        type: String,
+        default: ""
     },
-    mobile : {
-        type : Number,
-        default : null
+    mobile: {
+        type: Number,
+        default: null
     },
-    refresh_token : {
-        type : String,
-        default : ""
+    refresh_token: {
+        type: String,
+        default: ""
     },
-    verify_email : {
-        type : Boolean,
-        default : false
+    verify_email: {
+        type: Boolean,
+        default: false
     },
-    last_login_date : {
-        type : Date,
-        default : ""
+    last_login_date: {
+        type: Date,
+        default: null  // Fixed: Changed "" to null
     },
-    status : {
-        type : String,
-        enum : ["Active", "Inactive", "Suspended"],
-        default : "Active"
+    status: {
+        type: String,
+        enum: ["Active", "Inactive", "Suspended"],
+        default: "Active"
     },
-    address_details : [
+    address_details: [
         {
-            type : mongoose.Schema.ObjectId,
-            ref : 'address'
+            type: mongoose.Schema.ObjectId,
+            ref: "address"
         }
     ],
-    shopping_cart : [
+    shopping_cart: [
         {
-            type : mongoose.Schema.ObjectId,
-            ref : 'cartProduct'
+            type: mongoose.Schema.ObjectId,
+            ref: "cartProduct"
         }
     ],
-    orderHistory : [
+    orderHistory: [
         {
-            type : mongoose.Schema.ObjectId,
-            ref : 'order'
+            type: mongoose.Schema.ObjectId,
+            ref: "order"
         }
     ],
-    forgot_password_otp : {
-        type : String,
-        default : null
+    forgot_password_otp: {
+        type: String,
+        default: null
     },
-    forget_password_expiry : {
-        type : Date,
-        default : ""
+    forget_password_expiry: {
+        type: Date,
+        default: null  // Fixed: Changed "" to null
     },
-    role : {
-        type : String,
-        enum : ['ADMIN', 'USERS'],
-        default : "USER"
+    role: {
+        type: String,
+        enum: ["ADMIN", "USER"],  // Fixed: Changed "USERS" to "USER"
+        default: "USER"
     }
-},{
-    timestamps : true
-})
+}, {
+    timestamps: true
+});
 
-const UserModel = mongoose.model("user", userSchema)
+const UserModel = mongoose.model("User", userSchema);  // Capitalized "User" as a common convention
 
-export default UserModel
+export default UserModel;
